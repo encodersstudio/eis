@@ -10,7 +10,8 @@ def convert_webp(source, count):
         os.makedirs(working_directory)
 
     save_path = Path("images_webp")
-    destination = (f"{working_directory}\image_{count}.webp")
+    f_name = os.path.basename(source.with_suffix(".webp"))
+    destination = f"{working_directory}\{f_name}"
 
     image = Image.open(source)
     image.save(destination, format="webp")

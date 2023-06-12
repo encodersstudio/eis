@@ -1,5 +1,6 @@
 import csv, os
 import urllib, urllib.request
+from urllib.parse import urlparse
 
 from PySide6.QtCore import QSize, Qt
 from PySide6.QtWidgets import QWidget, QMainWindow, QPushButton, QFileDialog, QVBoxLayout, QLabel, QProgressBar
@@ -75,8 +76,10 @@ class MainWindow(QMainWindow):
             for line in csvfile:
                 # splitted_line = line.split(',')
                 # check if we have an image URL
+
                 if line != '' and line != "\n":
-                    urllib.request.urlretrieve(line, f"{working_directory}\image{str(i+1)}.jpg")
+                    f_name = urlparse(line)
+                    urllib.request.urlretrieve(line, f"{working_directory}\{os.path.basename(f_name.path)}")
                     print("Image saved for {0}".format(line))
                     i += 1
 
