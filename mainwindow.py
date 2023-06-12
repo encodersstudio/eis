@@ -1,4 +1,4 @@
-import csv
+import csv, os
 import urllib, urllib.request
 
 from PySide6.QtCore import QSize, Qt
@@ -61,6 +61,11 @@ class MainWindow(QMainWindow):
         return file_name
 
     def download_img(self):
+
+        desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
+        working_directory = f"{desktop}/images_jpgs"
+        if not os.path.exists(working_directory):
+            os.makedirs(working_directory)
         # download_images(self.filename, self.num)
         with open("{0}".format(self.filename), 'r') as csvfile:
             # iterate on all lines
@@ -70,12 +75,12 @@ class MainWindow(QMainWindow):
                 # splitted_line = line.split(',')
                 # check if we have an image URL
                 if line != '' and line != "\n":
-                    urllib.request.urlretrieve(line, f"images_jpgs/image{str(i+1)}.jpg")
-                    print("Image saved for {0}".format(line))
+                    urllib.request.urlretrieve(line, f"{working_directory}/image{str(i+1)}.jpg")
+                    # print("Image saved for {0}".format(line))
                     i += 1
 
-                else:
-                    print("No result for {0}".format(line))
+                # else:
+                    # print("No result for {0}".format(line))
             self.progress_label.setText(f"{i}/{self.t_num} Images saved.")
             self.download_images_button.setEnabled(False)
         self.convert_button.setEnabled(True)
