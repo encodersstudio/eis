@@ -19,16 +19,39 @@ def convert_webp(source, count):
     return destination
 
 
-def run_converter():
+def run_converter(folder_path):
     desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
-    working_directory = f"{desktop}\images_jpgs"
+    working_directory = folder_path
     if not os.path.exists(working_directory):
         os.makedirs(working_directory)
 
     paths = Path(working_directory).glob("**/*.jpg")
+
     i = 0
     for path in paths:
+        print(path)
         webp_path = convert_webp(path, i)
         i += 1
         print(webp_path)
+
+    paths = Path(working_directory).glob("**/*.png")
+
+    i = 0
+    for path in paths:
+        print(path)
+        webp_path = convert_webp(path, i)
+        i += 1
+        print(webp_path)
+
+    paths = Path(working_directory).glob("**/*.heic")
+
+    i = 0
+    for path in paths:
+        print(path)
+        webp_path = convert_webp(path, i)
+        i += 1
+        print(webp_path)
+
+
+# run_converter("C:/Users/nadir/Desktop/downloaded_images")
 
