@@ -20,9 +20,9 @@ def convert_webp(source, count):
     return destination
 
 
-def run_converter():
-    desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
-    working_directory = f"{desktop}/images_jpgs"
+def run_converter(folder_path):
+    # desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
+    working_directory = folder_path
     paths = Path(working_directory).glob("**/*.jpg")
     i = 0
     for path in paths:
